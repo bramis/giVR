@@ -1,0 +1,9 @@
+{
+  "name": "giVR",
+  "version": "1.0.0",
+  "description": "giVR",
+  "main": "index.js",
+  "repository": "https://github.com/bramis/giVR.git",
+  "author": "sacha brami <sbrami@wynd.eu>",
+  "license": "MIT"
+}
