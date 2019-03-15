@@ -1,7 +1,12 @@
 {
+<<<<<<< 3c8ce8725fa3650f57809602480b4c6463ca7d04
   "env": {
     "development": {
       "presets": ["react-360"]
     }
   }
 }
+=======
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+>>>>>>> chore(jest): Added jest / enzyme / babel

@@ -1,2 +1,8 @@
+<<<<<<< 3c8ce8725fa3650f57809602480b4c6463ca7d04
 node_modules/
 coverage/
+=======
+node_modules
+coverage
+
+>>>>>>> chore(jest): Added jest / enzyme / babel

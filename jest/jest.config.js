@@ -21,6 +21,7 @@ module.exports = {
   transform: {
     '^.+\\.jsx?$': 'babel-jest',
   },
+  transformIgnorePatterns: ['<rootDir>/node_modules/'],
   modulePaths: [
     './',
     '<rootDir>/pages/',
