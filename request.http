@@ -1,0 +1,19 @@
+GET http://127.0.0.1:3000/ HTTP/1.1
+
+###
+
+POST http://127.0.0.1:3000/google HTTP/1.1
+content-type: application/json
+
+{
+    "query": "mock"
+}
+
+###
+
+POST http://127.0.0.1:3000/unsplash HTTP/1.1
+content-type: application/json
+
+{
+    "query": "mock"
+}

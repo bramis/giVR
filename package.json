@@ -1,12 +1,14 @@
 {
-  "name": "giVR",
+  "name": "@abbeal/givr",
   "version": "1.0.0",
   "description": "giVR",
   "license": "MIT",
   "repository": "https://github.com/bramis/giVR.git",
   "author": "sacha brami <sbrami@wynd.eu>",
   "scripts": {
-    "start": "node node_modules/react-360/scripts/packager.js",
+    "start:giVR": "node node_modules/react-360/scripts/packager.js",
+    "start:api": "node node_modules/nodemon/bin/nodemon.js --watch api api/app.js",
+    "start": "node node_modules/foreman/nf.js start",
     "bundle": "node node_modules/react-360/scripts/bundle.js",
     "open": "node -e \"require('xopen')('http://localhost:8081/index.html')\"",
     "devtools": "react-devtools",
@@ -24,11 +26,18 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "foreman": "^3.0.1",
+    "node-fetch": "^2.3.0",
+    "nodemon": "^1.18.10",
     "react": "16.3.2",
     "react-360": "~1.1.0",
     "react-360-web": "~1.1.0",
     "react-native": "~0.55.4",
-    "three": "^0.87.0"
+    "three": "^0.87.0",
+    "unsplash-js": "^5.0.0"
   },
   "devDependencies": {
     "babel-jest": "^19.0.0",
