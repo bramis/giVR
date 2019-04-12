@@ -16,7 +16,8 @@
     "cm": "git-cz",
     "outdated": "yarn outdated",
     "bump": "yarn upgrade-interactive --latest",
-    "eslint": "eslint --fix ."
+    "eslint": "eslint --fix .",
+    "release": "env-cmd --fallback ./.env.local semantic-release --dry-run --no-ci"
   },
   "husky": {
     "hooks": {
@@ -48,11 +49,15 @@
   "devDependencies": {
     "@commitlint/cli": "7.5.2",
     "@commitlint/config-conventional": "7.5.0",
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
+    "@semantic-release/github": "^5.2.10",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^19.0.0",
     "babel-preset-react-native": "^1.9.1",
     "commitizen": "3.0.7",
     "cz-conventional-changelog": "2.1.0",
+    "env-cmd": "^8.0.2",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.15.2",
@@ -65,6 +70,7 @@
     "lint-staged": "^8.1.5",
     "react-devtools": "^2.5.2",
     "react-test-renderer": "16.0.0",
+    "semantic-release": "^15.13.3",
     "xopen": "1.0.0"
   }
 }
