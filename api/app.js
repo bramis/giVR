@@ -30,56 +30,62 @@ app.get('/', (req, res) => {
   res.send('hello from api');
 });
 
-const transformGoogleData = data => data.items.reduce((result, item) => {
-  result.push({
-    title: item.title,
-    src: item.link,
-    height: item.image.height,
-    width: item.image.width,
-    thumbnail: item.image.thumbnailLink,
-  });
+const transformGoogleData = data => data.items.reduce(
+  (result, item) => [
+    ...result,
+    {
+      title: item.title,
+      src: item.link,
+      height: item.image.height,
+      width: item.image.width,
+      thumbnail: item.image.thumbnailLink,
+    },
+  ],
+  [],
+);
 
-  return result;
-}, []);
-
-const transformUnsplashData = data => data.reduce((result, item) => {
-  result.push({
-    title: item.alt_description,
-    src: item.urls.full,
-    height: item.height,
-    width: item.width,
-    thumbnail: item.urls.thumb,
-  });
-
-  return result;
-}, []);
+const transformUnsplashData = data => data.reduce(
+  (result, item) => [
+    ...result,
+    {
+      title: item.alt_description,
+      src: item.urls.full,
+      height: item.height,
+      width: item.width,
+      thumbnail: item.urls.thumb,
+    },
+  ],
+  [],
+);
 
 app.post('/google', async (req, res) => {
   const { query } = req.body;
 
-  const result = query === 'mock'
-    ? mockGoogleCat
-    : transformGoogleData(
-      (await axios.get(
-        `https://www.googleapis.com/customsearch/v1?q=${query}&searchType=${searchType}&key=${googleKey}&cx=${googleCx}`,
-      )).data,
-    );
-
   res.setHeader('Content-Type', 'application/json');
-  res.json(result);
+
+  res.send(
+    query === 'mock'
+      ? mockGoogleCat
+      : transformGoogleData(
+        (await axios.get(
+          `https://www.googleapis.com/customsearch/v1?q=${query}&searchType=${searchType}&key=${googleKey}&cx=${googleCx}`,
+        )).data,
+      ),
+  );
 });
 
 app.post('/unsplash', async (req, res) => {
   const { query } = req.body;
 
-  const result = query === 'mock'
-    ? mockUnsplashCat
-    : transformUnsplashData(
-      await unsplash.photos.searchPhotos(query, undefined, 1, 10).then(toJson),
-    );
-
   res.setHeader('Content-Type', 'application/json');
-  res.json(result);
+
+  res.send(
+    query === 'mock'
+      ? mockUnsplashCat
+      : transformUnsplashData(
+        await unsplash.photos.searchPhotos(query, undefined, 1, 10).then(toJson),
+      ),
+  );
 });
 
 app.listen(3000, () => {
