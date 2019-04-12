@@ -83,5 +83,5 @@ app.post('/unsplash', async (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log('api listening on port 3000!');
+  console.log('api listening on port 3000!'); // eslint-disable-line no-console
 });
