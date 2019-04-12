@@ -22,5 +22,5 @@
     "arrow-parens": 0,
     "no-nested-ternary": 0
   },
-  "globals": {"shallow": 1, "mount":1, "render":1}
+  "globals": { "shallow": 1, "mount": 1, "render": 1 }
 }
