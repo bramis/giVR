@@ -1,24 +1,7 @@
 import React from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-360';
+import { AppRegistry, StyleSheet } from 'react-360';
 
-export default class giVR extends React.Component {
-  render() {
-    return (
-      <View style={styles.panel}>
-        <View style={styles.greetingBox}>
-          <Text style={styles.greeting}>
-            Welcome to React 360
-          </Text>
-        </View>
-      </View>
-    );
-  }
-};
+import root from './views/Root';
 
 const styles = StyleSheet.create({
   panel: {
@@ -39,5 +22,11 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
 });
+
+export default class giVR extends React.Component {
+  render() {
+    return root(this, styles);
+  }
+}
 
 AppRegistry.registerComponent('giVR', () => giVR);
