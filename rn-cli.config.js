@@ -1,16 +1,21 @@
-'use strict';
+const path = require('path');
+const blacklist = require('metro-config/src/defaults/blacklist');
 
-var path = require('path');
-var blacklist = require('metro/src/blacklist');
+function getRoots() {
+  const root = process.env.REACT_NATIVE_APP_ROOT;
+  if (root) {
+    return [path.resolve(root)];
+  }
+  return [path.resolve(__dirname)];
+}
 
-var config = {
+module.exports = {
   getProjectRoots() {
     return getRoots();
   },
 
   getBlacklistRE() {
-    return blacklist([
-    ]);
+    return blacklist([]);
   },
 
   getAssetExts() {
@@ -24,14 +29,6 @@ var config = {
   getProvidesModuleNodeModules() {
     return ['react-native', 'react-360'];
   },
+
+  getSourceExts: () => ['jsx'],
 };
-
-function getRoots() {
-  var root = process.env.REACT_NATIVE_APP_ROOT;
-  if (root) {
-    return [path.resolve(root)];
-  }
-  return [path.resolve(__dirname)];
-}
-
-module.exports = config;
