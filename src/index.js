@@ -6,8 +6,11 @@ import root from './views/Root';
 const styles = StyleSheet.create({
   panel: {
     // Fill the entire surface
-    width: 1000,
+    position: 'relative',
+    width: 2000,
     height: 600,
+    display: 'flex',
+    flexDirection: 'row',
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
     justifyContent: 'center',
     alignItems: 'center',
@@ -24,6 +27,21 @@ const styles = StyleSheet.create({
 });
 
 export default class giVR extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isFullScreen: false, fullScreenSrc: '' };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(src) {
+    this.setState(state => ({
+      isFullScreen: !state.isFullScreen,
+      fullScreenSrc: src,
+    }));
+  }
+
   render() {
     return root(this, styles);
   }
