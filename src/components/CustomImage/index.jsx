@@ -1,7 +1,7 @@
 import React from 'react';
 import t from 'prop-types';
 import {
-  StyleSheet, Image, View, VrButton,
+  StyleSheet, asset, Image, View, VrButton,
 } from 'react-360';
 
 const styles = StyleSheet.create({
@@ -31,37 +31,34 @@ const styles = StyleSheet.create({
 });
 
 const CustomImage = ({
-  isFullScreen, fullScreenSrc, handleClick, src,
+  isFullScreen, fullScreenId, handleClick, src, uri, id,
 }) => (
-  <View
-    style={
-      isFullScreen && src === fullScreenSrc
-        ? styles.fullscreen
-        : { zIndex: 0 }
-    }
-  >
-    <VrButton onClick={e => handleClick(src, e)}>
-      <Image source={src} style={styles.image} />
+  <View style={isFullScreen && id === fullScreenId ? styles.fullscreen : { zIndex: 0 }}>
+    <VrButton onClick={e => handleClick(id, e)}>
+      <Image source={src ? asset(src) : { uri }} style={styles.image} />
     </VrButton>
 
-    <VrButton onClick={e => handleClick(src, e)}>
+    <VrButton onClick={e => handleClick(id, e)}>
       <Image
-        source={src}
-        style={
-          isFullScreen && src === fullScreenSrc
-            ? styles.fullscreenImage
-            : { display: 'none' }
-        }
+        source={src ? asset(src) : { uri }}
+        style={isFullScreen && id === fullScreenId ? styles.fullscreenImage : { display: 'none' }}
       />
     </VrButton>
   </View>
 );
 
+CustomImage.defaultProps = {
+  src: '',
+  uri: '',
+};
+
 CustomImage.propTypes = {
   isFullScreen: t.bool.isRequired,
-  fullScreenSrc: t.string.isRequired,
+  fullScreenId: t.number.isRequired,
   handleClick: t.func.isRequired,
-  src: t.string.isRequired,
+  src: t.string,
+  uri: t.string,
+  id: t.number.isRequired,
 };
 
 export default CustomImage;

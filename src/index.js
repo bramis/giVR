@@ -3,28 +3,27 @@ import { AppRegistry } from 'react-360';
 
 import Root from './views/Root';
 
-
 export default class giVR extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isFullScreen: false, fullScreenSrc: '' };
+    this.state = { isFullScreen: false, fullScreenId: 0 };
 
     // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(src) {
+  handleClick(id) {
     this.setState(state => ({
       isFullScreen: !state.isFullScreen,
-      fullScreenSrc: src,
+      fullScreenId: id,
     }));
   }
 
   render() {
-    const { fullScreenSrc, isFullScreen } = this.state;
+    const { fullScreenId, isFullScreen } = this.state;
     return (
       <Root
-        fullScreenSrc={fullScreenSrc}
+        fullScreenId={fullScreenId}
         isFullScreen={isFullScreen}
         handleClick={this.handleClick}
       />
