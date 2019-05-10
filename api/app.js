@@ -22,6 +22,12 @@ const unsplash = new Unsplash({
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 // parse application/x-www-form-urlencoded and application/json
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -58,6 +64,16 @@ const transformUnsplashData = data => data.reduce(
   ],
   [],
 );
+
+app.get('/image', async (req, res) => {
+  const { url } = req.query;
+  try {
+    const response = await axios.get(url, { responseType: 'arrayBuffer' });
+    res.send(`data:image/jpeg;base64, ${Buffer.from(response.data, 'binary').toString('base64')}`);
+  } catch (err) {
+    console.error(err.message || err); // eslint-disable-line no-console
+  }
+});
 
 app.post('/google', async (req, res) => {
   const { query } = req.body;
