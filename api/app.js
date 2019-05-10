@@ -3,7 +3,7 @@ const axios = require('axios');
 const Unsplash = require('unsplash-js').default;
 const { toJson } = require('unsplash-js');
 const bodyParser = require('body-parser');
-
+const cors = require('cors');
 global.fetch = require('node-fetch');
 
 const mockGoogleCat = require('./mock/google_cat.json');
@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 // parse application/x-www-form-urlencoded and application/json
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send('hello from api');

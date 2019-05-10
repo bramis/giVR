@@ -1,7 +1,7 @@
 // This file contains the boilerplate to execute your React app.
 // If you want to modify your application's content, start in "index.js"
 
-import { ReactInstance } from 'react-360-web';
+import { ReactInstance, Surface } from 'react-360-web';
 
 function init(bundle, parent, options = {}) {
   const r360 = new ReactInstance(bundle, parent, {
@@ -10,12 +10,14 @@ function init(bundle, parent, options = {}) {
     ...options,
   });
 
+  const mySurface = new Surface(4680 /* width */, 600, Surface.SurfaceShape.Cylinder);
+
   // Render your app content to the default cylinder surface
   r360.renderToSurface(
     r360.createRoot('giVR', {
       /* initial props */
     }),
-    r360.getDefaultSurface(),
+    mySurface,
   );
 
   const s = r360.getDefaultSurface();
