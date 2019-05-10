@@ -1,4 +1,5 @@
 import React from 'react';
+import t from 'prop-types';
 import {
   StyleSheet, Image, View, VrButton,
 } from 'react-360';
@@ -29,23 +30,25 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ component, src }) => (
+const CustomImage = ({
+  isFullScreen, fullScreenSrc, handleClick, src,
+}) => (
   <View
     style={
-      component.state.isFullScreen && src === component.state.fullScreenSrc
+      isFullScreen && src === fullScreenSrc
         ? styles.fullscreen
         : { zIndex: 0 }
     }
   >
-    <VrButton onClick={e => component.handleClick(src, e)}>
+    <VrButton onClick={e => handleClick(src, e)}>
       <Image source={src} style={styles.image} />
     </VrButton>
 
-    <VrButton onClick={e => component.handleClick(src, e)}>
+    <VrButton onClick={e => handleClick(src, e)}>
       <Image
         source={src}
         style={
-          component.state.isFullScreen && src === component.state.fullScreenSrc
+          isFullScreen && src === fullScreenSrc
             ? styles.fullscreenImage
             : { display: 'none' }
         }
@@ -53,3 +56,12 @@ export default ({ component, src }) => (
     </VrButton>
   </View>
 );
+
+CustomImage.propTypes = {
+  isFullScreen: t.bool.isRequired,
+  fullScreenSrc: t.string.isRequired,
+  handleClick: t.func.isRequired,
+  src: t.string.isRequired,
+};
+
+export default CustomImage;

@@ -70,7 +70,7 @@ app.get('/image', async (req, res) => {
     const response = await axios.get(url, { responseType: 'arrayBuffer' });
     res.send(`data:image/jpeg;base64, ${Buffer.from(response.data, 'binary').toString('base64')}`);
   } catch (err) {
-    console.error(err.message || err);
+    console.error(err.message || err); // eslint-disable-line no-console
   }
 });
 

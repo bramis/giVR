@@ -11,7 +11,7 @@ module.exports = {
   ],
   coverageDirectory: '<rootDir>/coverage',
   globals: {
-    NODE_ENV: 'test'
+    NODE_ENV: 'test',
   },
   testURL: 'http://localhost', // https://github.com/jsdom/jsdom/issues/2304
   testPathIgnorePatterns: [
