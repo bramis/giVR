@@ -10,7 +10,7 @@ function init(bundle, parent, options = {}) {
     ...options,
   });
 
-  const mySurface = new Surface(4680 /* width */, 600, Surface.SurfaceShape.Cylinder);
+  const mySurface = new Surface(4096 /* width */, 720, Surface.SurfaceShape.Cylinder);
 
   // Render your app content to the default cylinder surface
   r360.renderToSurface(
@@ -21,7 +21,7 @@ function init(bundle, parent, options = {}) {
   );
 
   const s = r360.getDefaultSurface();
-  s.resize(2000, 600);
+  s.resize(4096, 720);
 
   // Load the initial environment
   r360.compositor.setBackground(r360.getAssetURL('360_world.jpg'));

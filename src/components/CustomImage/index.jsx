@@ -4,52 +4,55 @@ import {
   StyleSheet, asset, Image, View, VrButton,
 } from 'react-360';
 
-const styles = StyleSheet.create({
-  image: {
-    // Fill the entire surface
-    width: 333,
-    height: 200,
-    zIndex: 0,
-    margin: 10,
-  },
-  image2: {
-    width: 333,
-    height: 200,
-  },
-  fullscreenImage: {
-    position: 'absolute',
-    zIndex: 1000,
-    top: -310,
-    left: -163,
-    width: 666,
-    height: 400,
-    margin: 10,
-  },
-  fullscreen: {
-    zIndex: 1000,
-  },
-});
-
 const CustomImage = ({
-  isFullScreen, fullScreenId, handleClick, src, uri, id,
-}) => (
-  <View style={isFullScreen && id === fullScreenId ? styles.fullscreen : { zIndex: 0 }}>
-    <VrButton onClick={e => handleClick(id, e)}>
-      <Image source={src ? asset(src) : { uri }} style={styles.image} />
-    </VrButton>
+  isFullScreen, fullScreenId, handleClick, src, uri, id, height, width,
+}) => {
+  const proportion = height === 0 ? 1 : height / 200;
+  const fullscreenProportion = height === 0 ? 1 : height / 400;
 
-    <VrButton onClick={e => handleClick(id, e)}>
-      <Image
-        source={src ? asset(src) : { uri }}
-        style={isFullScreen && id === fullScreenId ? styles.fullscreenImage : { display: 'none' }}
-      />
-    </VrButton>
-  </View>
-);
+  const styles = StyleSheet.create({
+    image: {
+      // Fill the entire surface
+      width: width / proportion,
+      height: 200,
+      zIndex: 0,
+      margin: 10,
+    },
+    fullscreenImage: {
+      position: 'absolute',
+      zIndex: 1000,
+      top: -310,
+      left: -(width / proportion) / 2,
+      width: width / fullscreenProportion,
+      height: 400,
+      margin: 10,
+    },
+    fullscreen: {
+      zIndex: 1000,
+    },
+  });
+
+  return (
+    <View style={isFullScreen && id === fullScreenId ? styles.fullscreen : { zIndex: 0 }}>
+      <VrButton onClick={e => handleClick(id, e)}>
+        <Image source={uri ? { uri } : asset(src)} style={styles.image} />
+      </VrButton>
+
+      <VrButton onClick={e => handleClick(id, e)}>
+        <Image
+          source={uri ? { uri } : asset(src)}
+          style={isFullScreen && id === fullScreenId ? styles.fullscreenImage : { display: 'none' }}
+        />
+      </VrButton>
+    </View>
+  );
+};
 
 CustomImage.defaultProps = {
-  src: '',
+  src: 'cat.png',
   uri: '',
+  height: 0,
+  width: 0,
 };
 
 CustomImage.propTypes = {
@@ -59,6 +62,8 @@ CustomImage.propTypes = {
   src: t.string,
   uri: t.string,
   id: t.number.isRequired,
+  height: t.number,
+  width: t.number,
 };
 
 export default CustomImage;
