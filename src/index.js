@@ -18,12 +18,14 @@ export default class giVR extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+
   componentDidMount() {
-    axios.post('http://localhost:3000/google', { query: 'mock' }).then(async ({ data: images }) => {
+    const internalIp = 'localhost'; // put your internal ip here if you wanna use it on a VR headset
+    axios.post(`http://${internalIp}:3000/google`, { query: 'mock' }).then(async ({ data: images }) => {
       const data = await Promise.all(
         images.map(async item => ({
           ...item,
-          src: (await axios.get(`http://localhost:3000/image?url=${item.src}`)).data,
+          src: (await axios.get(`http://${internalIp}:3000/image?url=${item.src}`)).data,
         })),
       );
 
@@ -33,7 +35,7 @@ export default class giVR extends React.Component {
 
   handleClick(id) {
     this.setState(state => ({
-      isFullScreen: !state.isFullScreen,
+      isFullScreen: state.fullScreenId !== id || !state.isFullScreen,
       fullScreenId: id,
     }));
   }

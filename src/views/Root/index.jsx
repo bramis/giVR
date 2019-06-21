@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-360';
 import t from 'prop-types';
 
 import CustomImage from '../../components/CustomImage';
+import FullScreenImage from '../../components/FullScreenImage';
 
 const styles = StyleSheet.create({
   panel: {
@@ -24,27 +25,46 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
   },
+  fullscreenPanel: {
+    zIndex: 10000,
+    width: 4096,
+    height: 720,
+    position: 'absolute',
+  },
 });
 
 const Root = ({
   handleClick, isFullScreen, fullScreenId, images,
 }) => (
-  <View style={styles.panel}>
-    {images.map(({
-      src, thumbnail, height, width,
-    }, index) => (
-      <CustomImage
-        handleClick={handleClick}
-        isFullScreen={isFullScreen}
-        fullScreenId={fullScreenId}
-        id={index}
-        key={thumbnail}
-        uri={src}
-        height={height}
-        width={width}
-      />
-    ))}
+  <View>
+    <View style={styles.panel}>
+      {images.map(({
+        src, thumbnail, width, height,
+      }, index) => (
+        <CustomImage
+          handleClick={handleClick}
+          id={index}
+          key={thumbnail}
+          uri={src}
+          height={height}
+          width={width}
+        />
+      ))}
+    </View>
+    <View style={styles.fullscreenPanel}>
+      {isFullScreen
+        ? (
+          <FullScreenImage
+            handleClick={handleClick}
+            img={images[fullScreenId]}
+            fullScreenId={fullScreenId}
+          />
+        )
+        : <View />
+  }
+    </View>
   </View>
+
 );
 
 Root.propTypes = {
