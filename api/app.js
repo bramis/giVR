@@ -68,8 +68,8 @@ const transformUnsplashData = data => data.reduce(
 app.get('/image', async (req, res) => {
   const { url } = req.query;
   try {
-    const response = await axios.get(url, { responseType: 'arrayBuffer' });
-    res.send(`data:image/jpeg;base64, ${Buffer.from(response.data, 'binary').toString('base64')}`);
+    const response = await axios.get(url, { responseType: 'arraybuffer' });
+    res.send(`data:image/jpeg;base64,${Buffer.from(response.data, 'binary').toString('base64')}`);
   } catch (err) {
     console.error(err.message || err); // eslint-disable-line no-console
   }
@@ -85,7 +85,7 @@ app.post('/google', async (req, res) => {
       ? mockGoogleCat
       : transformGoogleData(
         (await axios.get(
-          `https://www.googleapis.com/customsearch/v1?q=${query}&searchType=${searchType}&key=${googleKey}&cx=${googleCx}`,
+          `https://www.googleapis.com/customsearch/v1?q=${query}&imgSize=xxlarge&searchType=${searchType}&key=${googleKey}&cx=${googleCx}`,
         )).data,
       ),
   );
