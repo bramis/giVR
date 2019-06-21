@@ -19,6 +19,7 @@ export default class giVR extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+
   componentDidMount() {
     axios.post(`http://${ip}:3000/google`, { query: 'mock' }).then(async ({ data: images }) => {
       const data = await Promise.all(
@@ -34,7 +35,7 @@ export default class giVR extends React.Component {
 
   handleClick(id) {
     this.setState(state => ({
-      isFullScreen: !state.isFullScreen,
+      isFullScreen: state.fullScreenId !== id || !state.isFullScreen,
       fullScreenId: id,
     }));
   }
