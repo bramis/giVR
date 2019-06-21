@@ -4,6 +4,7 @@ import { AppRegistry } from 'react-360';
 import axios from 'axios';
 
 import Root from './views/Root';
+import { ip } from '../static_assets/internalIp.json';
 
 export default class giVR extends React.Component {
   constructor(props) {
@@ -19,11 +20,11 @@ export default class giVR extends React.Component {
   }
 
   componentDidMount() {
-    axios.post('http://localhost:3000/google', { query: 'mock' }).then(async ({ data: images }) => {
+    axios.post(`http://${ip}:3000/google`, { query: 'mock' }).then(async ({ data: images }) => {
       const data = await Promise.all(
         images.map(async item => ({
           ...item,
-          src: (await axios.get(`http://localhost:3000/image?url=${item.src}`)).data,
+          src: (await axios.get(`http://${ip}:3000/image?url=${item.src}`)).data,
         })),
       );
 
