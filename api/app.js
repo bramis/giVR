@@ -69,10 +69,6 @@ app.get('/image', async (req, res) => {
   const { url } = req.query;
   try {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
-    // console.log(url);
-    // console.log(response.data.length);
-    // console.log(Buffer.from(response.data, 'binary').toString('base64').length);
-    // console.log('data load ! ');
     res.send(`data:image/jpeg;base64,${Buffer.from(response.data, 'binary').toString('base64')}`);
   } catch (err) {
     console.error(err.message || err); // eslint-disable-line no-console
