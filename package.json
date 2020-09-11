@@ -38,7 +38,7 @@
     "foreman": "^3.0.1",
     "jest": "^24.5.0",
     "metro-config": "^0.53.1",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.1",
     "nodemon": "^1.18.10",
     "prop-types": "^15.7.2",
     "react": "16.3.2",
