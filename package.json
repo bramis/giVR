@@ -72,7 +72,7 @@
     "lint-staged": "^8.1.5",
     "react-devtools": "^2.5.2",
     "react-test-renderer": "16.0.0",
-    "semantic-release": "^15.13.3",
+    "semantic-release": "^17.2.3",
     "xopen": "1.0.0"
   }
 }
